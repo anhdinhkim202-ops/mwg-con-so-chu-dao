@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Con Số Chủ Đạo · MWG Talent</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold-50:  #FFFBF0;
+    --gold-100: #FFF3CC;
+    --gold-200: #FFE280;
+    --gold-300: #FFD040;
+    --gold-400: #F5B800;
+    --gold-500: #D49E00;
+    --gold-600: #A87B00;
+    --gold-700: #7A5800;
+    --gold-800: #4F3800;
+    --red-mwg:  #D0021B;
+    --dark:     #1A1200;
+    --dark2:    #2E2200;
+    --mid:      #5C4500;
+    --text-body:#3A2C00;
+    --text-muted:#8B7040;
+    --bg-page:  #FFFDF5;
+    --bg-card:  #FFFFFF;
+    --bg-soft:  #FFF9E6;
+    --border:   rgba(212,158,0,0.18);
+    --border-md:rgba(212,158,0,0.35);
+    --shadow:   0 2px 16px rgba(212,158,0,0.12);
+    --shadow-lg:0 8px 40px rgba(212,158,0,0.18);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    background: var(--bg-page);
+    color: var(--text-body);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, #1A1200 0%, #2E2200 50%, #4F3800 100%);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 80% 50%, rgba(245,184,0,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 20% 30%, rgba(245,184,0,0.07) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .header-pattern {
+    position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent, transparent 24px,
+      rgba(245,184,0,0.03) 24px, rgba(245,184,0,0.03) 25px
+    );
+    pointer-events: none;
+  }
+  .header-inner {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 56px 32px 48px;
+    text-align: center;
+  }
+  .logo-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(245,184,0,0.12);
+    border: 1px solid rgba(245,184,0,0.3);
+    border-radius: 100px;
+    padding: 6px 16px;
+    margin-bottom: 24px;
+  }
+  .logo-dot { width: 8px; height: 8px; background: var(--gold-400); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(0.8)} }
+  .logo-chip span { font-size: 12px; font-weight: 600; color: var(--gold-300); letter-spacing: 0.08em; text-transform: uppercase; }
+
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 900;
+    color: #FFFFFF;
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+  header h1 em { color: var(--gold-300); font-style: normal; }
+  header p.subtitle {
+    font-size: 15px;
+    color: rgba(255,255,255,0.55);
+    font-weight: 300;
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* ── FORM SECTION ── */
+  .form-section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 48px 24px 0;
+  }
+
+  .input-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-md);
+    border-radius: 20px;
+    padding: 36px 40px;
+    box-shadow: var(--shadow-lg);
+  }
+  .input-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--gold-700);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .input-card h2::before {
+    content: '';
+    display: block;
+    width: 4px;
+    height: 24px;
+    background: var(--gold-400);
+    border-radius: 2px;
+  }
+
+  .date-row {
+    display: flex;
+    gap: 12px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+  }
+  .date-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .date-group label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .date-group select, .date-group input {
+    appearance: none;
+    -webkit-appearance: none;
+    background: var(--bg-soft);
+    border: 1.5px solid var(--border-md);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-body);
+    cursor: pointer;
+    transition: border-color .2s, box-shadow .2s;
+    outline: none;
+  }
+  .date-group select:focus, .date-group input:focus {
+    border-color: var(--gold-400);
+    box-shadow: 0 0 0 3px rgba(245,184,0,0.15);
+  }
+  .date-group select:hover, .date-group input:hover {
+    border-color: var(--gold-500);
+  }
+  #sel-ngay { width: 80px; }
+  #sel-thang { width: 110px; }
+  #sel-nam { width: 100px; }
+
+  .btn-calc {
+    background: linear-gradient(135deg, var(--gold-400) 0%, var(--gold-500) 100%);
+    color: var(--dark);
+    border: none;
+    border-radius: 12px;
+    padding: 12px 32px;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform .15s, box-shadow .15s;
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+    box-shadow: 0 4px 16px rgba(245,184,0,0.35);
+  }
+  .btn-calc:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(245,184,0,0.45); }
+  .btn-calc:active { transform: translateY(0); }
+
+  .calc-preview {
+    margin-top: 20px;
+    padding: 16px 20px;
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 2;
+    display: none;
+  }
+  .calc-preview.show { display: block; animation: fadeIn .3s ease; }
+  .calc-preview strong { color: var(--gold-600); font-weight: 600; }
+
+  /* ── RESULT SECTION ── */
+  #result-section {
+    max-width: 900px;
+    margin: 36px auto 0;
+    padding: 0 24px;
+    display: none;
+    animation: slideUp .5s ease;
+  }
+  #result-section.show { display: block; }
+
+  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+  @keyframes slideUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+  /* Number badge */
+  .number-hero {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    background: linear-gradient(135deg, #1A1200 0%, #2E2200 100%);
+    border-radius: 20px;
+    padding: 32px 36px;
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .number-hero::after {
+    content: '';
+    position: absolute;
+    right: -20px; top: -20px;
+    width: 160px; height: 160px;
+    background: radial-gradient(circle, rgba(245,184,0,0.12) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .num-badge {
+    flex-shrink: 0;
+    width: 80px; height: 80px;
+    background: linear-gradient(135deg, var(--gold-300) 0%, var(--gold-500) 100%);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--dark);
+    box-shadow: 0 4px 20px rgba(245,184,0,0.4);
+    position: relative;
+    z-index: 1;
+  }
+  .num-info { position: relative; z-index: 1; }
+  .num-info .num-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .num-info .num-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .num-info .num-name em { color: var(--gold-300); font-style: normal; }
+  .tags-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .tag {
+    background: rgba(245,184,0,0.15);
+    border: 1px solid rgba(245,184,0,0.3);
+    border-radius: 100px;
+    padding: 4px 14px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--gold-200);
+  }
+  /* special master glow */
+  .number-hero.master-number { background: linear-gradient(135deg, #0F0800 0%, #1A1200 50%, #2E1A00 100%); }
+  .number-hero.master-number .num-badge {
+    background: linear-gradient(135deg, #FFE066 0%, var(--gold-400) 50%, #FF8C00 100%);
+    box-shadow: 0 4px 24px rgba(255,200,0,0.5);
+  }
+  .master-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: linear-gradient(90deg, rgba(255,200,0,0.2), rgba(255,140,0,0.2));
+    border: 1px solid rgba(255,200,0,0.4);
+    border-radius: 100px;
+    padding: 3px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #FFD966;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  /* ── CONTENT GRID ── */
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  @media(max-width:640px) { .content-grid { grid-template-columns: 1fr; } }
+
+  .content-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: var(--shadow);
+  }
+  .content-card.full { grid-column: 1 / -1; }
+
+  .card-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .card-icon {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    flex-shrink: 0;
+  }
+  .icon-green  { background: #EAF6F0; color: #1B7A4E; }
+  .icon-red    { background: #FEF0F0; color: #C0392B; }
+  .icon-blue   { background: #EBF4FE; color: #1565C0; }
+  .icon-gold   { background: #FFF8E1; color: var(--gold-600); }
+
+  .card-head h3 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-body);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .trait-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .trait-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-body);
+  }
+  .trait-dot {
+    flex-shrink: 0;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    margin-top: 7px;
+  }
+  .dot-green { background: #27AE60; }
+  .dot-red   { background: #E74C3C; }
+
+  /* Lời khuyên */
+  .advice-card {
+    background: linear-gradient(135deg, var(--bg-soft) 0%, #FFFAED 100%);
+    border: 1px solid var(--border-md);
+    border-left: 4px solid var(--gold-400);
+    border-radius: 0 16px 16px 0;
+  }
+  .advice-text {
+    font-size: 14px;
+    line-height: 1.9;
+    color: var(--mid);
+    font-style: italic;
+  }
+
+  /* Table */
+  .jobs-table-wrap { overflow-x: auto; }
+  .jobs-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .jobs-table thead tr {
+    background: var(--bg-soft);
+  }
+  .jobs-table th {
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border-md);
+    white-space: nowrap;
+  }
+  .jobs-table td {
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-body);
+    vertical-align: middle;
+  }
+  .jobs-table tbody tr:last-child td { border-bottom: none; }
+  .jobs-table tbody tr:hover td { background: var(--bg-soft); }
+
+  .match-bar-wrap { display: flex; align-items: center; gap: 10px; }
+  .match-bar-bg {
+    flex: 1;
+    height: 6px;
+    background: rgba(212,158,0,0.12);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .match-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-400), var(--gold-500));
+    border-radius: 3px;
+    transition: width .8s cubic-bezier(.4,0,.2,1);
+  }
+  .match-pct {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gold-600);
+    min-width: 34px;
+    text-align: right;
+  }
+
+  .brand-pills { display: flex; gap: 4px; flex-wrap: wrap; }
+  .brand-pill {
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 2px 10px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--gold-700);
+    white-space: nowrap;
+  }
+
+  /* ── PICKER TABS ── */
+  .picker-section {
+    max-width: 900px;
+    margin: 0 auto 64px;
+    padding: 48px 24px 0;
+  }
+  .picker-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .picker-label::after { content:''; flex:1; height:1px; background:var(--border); }
+
+  .number-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .num-btn {
+    background: var(--bg-card);
+    border: 1.5px solid var(--border-md);
+    border-radius: 12px;
+    padding: 10px 16px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all .2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    min-width: 64px;
+    text-align: center;
+  }
+  .num-btn .n-small { font-family: 'Be Vietnam Pro', sans-serif; font-size: 10px; font-weight: 500; color: var(--text-muted); line-height: 1; }
+  .num-btn:hover { border-color: var(--gold-400); color: var(--gold-600); background: var(--bg-soft); transform: translateY(-2px); }
+  .num-btn.active {
+    background: linear-gradient(135deg, var(--gold-300) 0%, var(--gold-400) 100%);
+    border-color: var(--gold-400);
+    color: var(--dark);
+    box-shadow: 0 4px 16px rgba(245,184,0,0.3);
+    transform: translateY(-2px);
+  }
+  .num-btn.active .n-small { color: var(--dark2); }
+  .num-btn.master { border-style: dashed; }
+  .num-btn.master.active { border-style: solid; background: linear-gradient(135deg, #FFE066 0%, var(--gold-400) 100%); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark);
+    padding: 24px 32px;
+    text-align: center;
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.04em;
+    margin-top: 64px;
+  }
+  footer span { color: rgba(245,184,0,0.5); }
+
+  /* Divider ornament */
+  .ornament {
+    text-align: center;
+    color: var(--gold-300);
+    font-size: 18px;
+    letter-spacing: 12px;
+    margin: 32px 0;
+    opacity: 0.5;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-pattern"></div>
+  <div class="header-inner">
+    <div class="logo-chip">
+      <div class="logo-dot"></div>
+      <span>MWG Talent Acquisition</span>
+    </div>
+    <h1>Con Số <em>Chủ Đạo</em></h1>
+    <p class="subtitle">Khám phá tính cách, điểm mạnh và vị trí phù hợp nhất dành riêng cho bạn trong hệ sinh thái MWG.</p>
+  </div>
+</header>
+
+<!-- FORM NHẬP NGÀY SINH -->
+<div class="form-section">
+  <div class="input-card">
+    <h2>Nhập ngày sinh của bạn</h2>
+    <div class="date-row">
+      <div class="date-group">
+        <label>Ngày</label>
+        <select id="sel-ngay"></select>
+      </div>
+      <div class="date-group">
+        <label>Tháng</label>
+        <select id="sel-thang"></select>
+      </div>
+      <div class="date-group">
+        <label>Năm</label>
+        <select id="sel-nam"></select>
+      </div>
+      <button class="btn-calc" onclick="tinhSo()">Tính ngay →</button>
+    </div>
+    <div class="calc-preview" id="calc-preview"></div>
+  </div>
+</div>
+
+<!-- KẾT QUẢ -->
+<div id="result-section">
+  <div class="number-hero" id="num-hero">
+    <div class="num-badge" id="num-badge"></div>
+    <div class="num-info">
+      <div class="num-label" id="num-label">Con số chủ đạo</div>
+      <div id="master-badge-wrap"></div>
+      <div class="num-name" id="num-name"></div>
+      <div class="tags-row" id="tags-row"></div>
+    </div>
+  </div>
+
+  <div class="content-grid">
+    <div class="content-card">
+      <div class="card-head">
+        <div class="card-icon icon-green">✦</div>
+        <h3>Điểm mạnh</h3>
+      </div>
+      <ul class="trait-list" id="manh-list"></ul>
+    </div>
+    <div class="content-card">
+      <div class="card-head">
+        <div class="card-icon icon-red">◈</div>
+        <h3>Điểm cần phát triển</h3>
+      </div>
+      <ul class="trait-list" id="phat-list"></ul>
+    </div>
+    <div class="content-card full advice-card">
+      <div class="card-head">
+        <div class="card-icon icon-gold">◎</div>
+        <h3>Lời khuyên</h3>
+      </div>
+      <p class="advice-text" id="advice-text"></p>
+    </div>
+    <div class="content-card full">
+      <div class="card-head">
+        <div class="card-icon icon-blue">❋</div>
+        <h3>Vị trí phù hợp tại MWG</h3>
+      </div>
+      <div class="jobs-table-wrap">
+        <table class="jobs-table">
+          <thead>
+            <tr>
+              <th>Danh mục</th>
+              <th>Vị trí</th>
+              <th>Thương hiệu</th>
+              <th style="min-width:140px">Độ phù hợp</th>
+            </tr>
+          </thead>
+          <tbody id="jobs-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PICKER TẤT CẢ SỐ -->
+<div class="picker-section">
+  <div class="ornament">✦ · · ✦</div>
+  <div class="picker-label">Khám phá tất cả con số</div>
+  <div class="number-grid" id="number-grid"></div>
+</div>
+
+<footer>
+  <span>MWG Talent Acquisition</span> &nbsp;·&nbsp; Nội bộ · Bảo mật · 2025
+</footer>
+
+<script>
+// ───────────────────────────────────────────────
+// DATABASE – đầy đủ số 1–9 + 11/2, 22/4, 33/6
+// ───────────────────────────────────────────────
+const DATA = {
+  1: {
+    ten: 'Người Lãnh Đạo',
+    tags: ['Tiên phong', 'Quyết đoán', 'Độc lập'],
+    master: false,
+    manh: [
+      'Tư duy tiên phong, luôn dẫn đầu xu hướng trong nhóm',
+      'Quyết đoán, không ngại đưa ra quyết định trong tình huống khó',
+      'Tập trung cao độ và kiên định với mục tiêu đã đặt ra',
+      'Bản lĩnh và tự tin trước áp lực, môi trường cạnh tranh cao',
+    ],
+    phat: [
+      'Đôi khi thiếu kiên nhẫn lắng nghe ý kiến của người khác',
+      'Xu hướng làm việc độc lập, ngại ủy quyền hoặc chia sẻ',
+      'Dễ nóng vội khi kết quả chưa đến như kỳ vọng',
+      'Khó chấp nhận ý kiến trái chiều từ đồng nghiệp',
+    ],
+    loi_khuyen: 'Bạn sinh ra để dẫn đường. Lãnh đạo giỏi không chỉ đi nhanh — mà còn kéo cả đội cùng đến đích. Hãy rèn kỹ năng lắng nghe và tin tưởng vào đội nhóm.',
+    jobs: [
+      { dm: 'Bán hàng / Thu ngân',        vt: 'Nhân viên bán hàng',              th: ['TGDĐ','ĐMX','BHX','TopZone'], match: 92 },
+      { dm: 'Phát triển mặt bằng',        vt: 'Chuyên viên phát triển mặt bằng', th: ['MWG Corp'],                    match: 85 },
+      { dm: 'Ngành hàng / Mua hàng',      vt: 'Chuyên viên ngành hàng',          th: ['BHX','ĐMX','TopZone'],         match: 80 },
+      { dm: 'Hành chánh / Nhân sự',       vt: 'Chuyên viên nhân sự',             th: ['MWG'],                         match: 70 },
+    ],
+  },
+  2: {
+    ten: 'Người Kết Nối',
+    tags: ['Đồng cảm', 'Tinh tế', 'Hài hòa'],
+    master: false,
+    manh: [
+      'Nhạy cảm và thấu hiểu tâm lý khách hàng ở chiều sâu',
+      'Kỹ năng giao tiếp và xây dựng quan hệ xuất sắc',
+      'Khả năng hòa giải mâu thuẫn, giữ gắn kết đội nhóm',
+      'Chú ý đến chi tiết nhỏ, ít để sót trong quy trình',
+    ],
+    phat: [
+      'Thiếu quyết đoán khi cần đưa ra lựa chọn khó, áp lực',
+      'Ngại xung đột, đôi khi không nói thẳng khi cần thiết',
+      'Hay trì hoãn quyết định để tránh làm mất lòng người khác',
+      'Dễ bị ảnh hưởng và hao năng lượng bởi môi trường tiêu cực',
+    ],
+    loi_khuyen: 'Sức mạnh của bạn nằm ở trái tim. Nói lên sự thật đúng lúc cũng là yêu thương — với đội nhóm và chính mình. Hãy rèn thêm kỹ năng ra quyết định.',
+    jobs: [
+      { dm: 'Tổng đài / Chăm sóc KH',    vt: 'Nhân viên chăm sóc khách hàng',  th: ['TGDĐ','ĐMX','MWG'],           match: 95 },
+      { dm: 'Hành chánh / Nhân sự',       vt: 'Chuyên viên tuyển dụng',          th: ['MWG'],                         match: 88 },
+      { dm: 'Bán hàng / Thu ngân',        vt: 'Nhân viên tư vấn bán hàng',       th: ['TGDĐ','ĐMX','BHX','TopZone'], match: 80 },
+      { dm: 'Dược / Y tế',                vt: 'Dược sĩ tư vấn',                  th: ['An Khang'],                    match: 74 },
+    ],
+  },
+  3: {
+    ten: 'Người Sáng Tạo',
+    tags: ['Biểu đạt', 'Hứng khởi', 'Linh hoạt'],
+    master: false,
+    manh: [
+      'Tư duy sáng tạo và khả năng biểu đạt ý tưởng rất độc đáo',
+      'Năng lượng tích cực, truyền cảm hứng tự nhiên cho đội nhóm',
+      'Bắt nhịp nhanh xu hướng thị trường, digital và social',
+      'Thuyết trình và kể chuyện thương hiệu hấp dẫn, cuốn hút',
+    ],
+    phat: [
+      'Khó duy trì sự tập trung vào một nhiệm vụ trong thời gian dài',
+      'Quản lý deadline và tiến độ chưa thực sự chặt chẽ',
+      'Chưa mạnh về phân tích số liệu và báo cáo định lượng',
+      'Bắt đầu nhiều dự án nhưng khó hoàn thành đồng đều tất cả',
+    ],
+    loi_khuyen: 'Óc sáng tạo là tài sản quý hiếm. Ghép nó với kỷ luật thực thi — một ý tưởng hoàn thành tạo giá trị hơn mười ý tưởng bỏ dở giữa chừng.',
+    jobs: [
+      { dm: 'Marketing / Media / PR',     vt: 'Chuyên viên marketing / content', th: ['MWG'],                         match: 95 },
+      { dm: 'Thiết kế / UX-UI',           vt: 'Nhân viên thiết kế / UX-UI',      th: ['MWG'],                         match: 90 },
+      { dm: 'TMĐT / Kênh online',         vt: 'Chuyên viên digital marketing',   th: ['MWG'],                         match: 82 },
+      { dm: 'Hành chánh / Nhân sự',       vt: 'Chuyên viên đào tạo nội bộ',      th: ['MWG'],                         match: 70 },
+    ],
+  },
+  4: {
+    ten: 'Người Xây Dựng',
+    tags: ['Kỷ luật', 'Hệ thống', 'Bền vững'],
+    master: false,
+    manh: [
+      'Tỉ mỉ, cẩn thận và luôn làm việc có hệ thống, quy trình rõ ràng',
+      'Khả năng lập kế hoạch và thực thi xuất sắc, đúng tiến độ',
+      'Đáng tin cậy — cam kết là hoàn thành, không bỏ cuộc giữa chừng',
+      'Phân tích vấn đề logic, ra quyết định dựa trên dữ liệu thực tế',
+    ],
+    phat: [
+      'Khó thích nghi khi quy trình hoặc kế hoạch thay đổi đột ngột',
+      'Đôi khi cứng nhắc với quy tắc đã đặt ra dù hoàn cảnh đã khác',
+      'Ngại mạo hiểm với những phương án chưa được kiểm chứng',
+      'Ít chú trọng đến yếu tố cảm xúc trong giao tiếp đội nhóm',
+    ],
+    loi_khuyen: 'Bạn là nền tảng vững chắc của mọi đội nhóm. Hãy mở lòng với thay đổi — đôi khi con đường tốt nhất không phải là con đường bạn đã vạch sẵn từ trước.',
+    jobs: [
+      { dm: 'Kế toán / Tài chính',        vt: 'Nhân viên kế toán',               th: ['MWG'],                         match: 93 },
+      { dm: 'Kho vận / Kho trung tâm',    vt: 'Nhân viên kho vận',               th: ['MWG'],                         match: 87 },
+      { dm: 'QA / QC / Kiểm soát',        vt: 'Nhân viên kiểm soát chất lượng',  th: ['MWG'],                         match: 84 },
+      { dm: 'Xây dựng / Bảo trì / Điện', vt: 'Kỹ thuật viên bảo trì',           th: ['MWG'],                         match: 72 },
+    ],
+  },
+  5: {
+    ten: 'Người Tự Do',
+    tags: ['Năng động', 'Khám phá', 'Thích ứng'],
+    master: false,
+    manh: [
+      'Năng động, thích nghi cực nhanh với môi trường và nhiệm vụ mới',
+      'Tư duy đa chiều, nhìn xa trông rộng, thấy cơ hội trước người khác',
+      'Xây dựng mạng lưới quan hệ rộng rãi và tự nhiên dễ dàng',
+      'Truyền đạt ý tưởng cuốn hút, có khả năng thuyết phục cao',
+    ],
+    phat: [
+      'Dễ chán nản và mất động lực khi công việc lặp đi lặp lại',
+      'Không thích thủ tục hành chính, báo cáo chi tiết',
+      'Đôi khi coi nhẹ các deadline nhỏ và cam kết chi tiết',
+      'Liên tục tìm kiếm thay đổi, khó duy trì ổn định lâu dài',
+    ],
+    loi_khuyen: 'Bạn sống để khám phá. Nhưng thành tựu lớn đến từ việc đào sâu — không chỉ bay lượn qua nhiều bề mặt. Hãy chọn một lĩnh vực để trở thành chuyên gia thực sự.',
+    jobs: [
+      { dm: 'Phát triển mặt bằng',        vt: 'Chuyên viên phát triển mặt bằng', th: ['MWG'],                         match: 90 },
+      { dm: 'Ngành hàng / Mua hàng',      vt: 'Chuyên viên mua hàng',            th: ['BHX','ĐMX','TopZone'],         match: 84 },
+      { dm: 'TMĐT / Kênh online',         vt: 'Chuyên viên kênh online',          th: ['MWG'],                         match: 80 },
+      { dm: 'Bán hàng / Thu ngân',        vt: 'Nhân viên bán hàng',              th: ['TGDĐ','ĐMX','BHX','TopZone'], match: 74 },
+    ],
+  },
+  6: {
+    ten: 'Người Nuôi Dưỡng',
+    tags: ['Trách nhiệm', 'Chu đáo', 'Gắn kết'],
+    master: false,
+    manh: [
+      'Tận tâm, có trách nhiệm cao với đồng đội và khách hàng',
+      'Xây dựng văn hóa nhóm gắn kết, ấm áp và bền vững',
+      'Đặt tiêu chuẩn cao về chất lượng dịch vụ và trải nghiệm',
+      'Lắng nghe tốt, hiểu được nhu cầu ẩn của người khác',
+    ],
+    phat: [
+      'Dễ kiệt sức khi liên tục đặt nhu cầu người khác lên trên bản thân',
+      'Khó nói không, dẫn đến ôm đồm quá nhiều công việc',
+      'Hay lo lắng và cầu toàn quá mức với mọi việc',
+      'Ngại đối đầu trực tiếp khi cần thiết phải làm vậy',
+    ],
+    loi_khuyen: 'Bạn là người giữ lửa cho đội nhóm. Tự chăm sóc bản thân không phải ích kỷ — đó là điều kiện để bạn tiếp tục cho đi lâu dài và bền vững.',
+    jobs: [
+      { dm: 'Dược / Y tế',                vt: 'Dược sĩ / nhân viên nhà thuốc',   th: ['An Khang'],                    match: 92 },
+      { dm: 'Tổng đài / Chăm sóc KH',    vt: 'Nhân viên chăm sóc khách hàng',   th: ['TGDĐ','ĐMX','MWG'],           match: 86 },
+      { dm: 'Hành chánh / Nhân sự',       vt: 'Chuyên viên nhân sự',             th: ['MWG'],                         match: 80 },
+      { dm: 'Bán hàng / Thu ngân',        vt: 'Nhân viên tư vấn bán hàng',       th: ['TGDĐ','ĐMX','BHX','TopZone'], match: 70 },
+    ],
+  },
+  7: {
+    ten: 'Người Tư Duy',
+    tags: ['Phân tích', 'Sâu sắc', 'Chính trực'],
+    master: false,
+    manh: [
+      'Phân tích sâu, luôn tìm ra bản chất thực sự của vấn đề',
+      'Xử lý thông tin phức tạp và nghiên cứu độc lập xuất sắc',
+      'Nhìn thấy xu hướng dài hạn mà người khác thường bỏ qua',
+      'Chính trực và kiên định với nguyên tắc, không dễ bị lung lay',
+    ],
+    phat: [
+      'Khó kết nối và chia sẻ với người không cùng tần số tư duy',
+      'Xu hướng phân tích quá kỹ, chậm ra quyết định hành động',
+      'Ngại trình bày và thuyết trình trước đám đông',
+      'Khó chấp nhận cảm tính hoặc các lập luận thiếu logic',
+    ],
+    loi_khuyen: 'Chiều sâu suy nghĩ của bạn là vũ khí hiếm có. Học cách trình bày insight theo ngôn ngữ đội nhóm hiểu — ý tưởng chỉ có giá trị thực sự khi được chia sẻ và áp dụng.',
+    jobs: [
+      { dm: 'Công nghệ thông tin / IT',   vt: 'Lập trình viên / nhân viên IT',   th: ['MWG'],                         match: 95 },
+      { dm: 'QA / QC / Kiểm soát',        vt: 'Nhân viên kiểm soát chất lượng',  th: ['BHX','MWG'],                   match: 88 },
+      { dm: 'Kế toán / Tài chính',        vt: 'Nhân viên kiểm toán nội bộ',      th: ['MWG'],                         match: 82 },
+      { dm: 'TMĐT / Kênh online',         vt: 'Chuyên viên phân tích dữ liệu',   th: ['MWG'],                         match: 76 },
+    ],
+  },
+  8: {
+    ten: 'Người Thịnh Vượng',
+    tags: ['Tham vọng', 'Hiệu quả', 'Quyết liệt'],
+    master: false,
+    manh: [
+      'Tư duy kinh doanh sắc bén, nhìn ra cơ hội nhanh hơn người',
+      'Quản lý nguồn lực và tài chính hiệu quả, tối ưu chi phí',
+      'Định hướng kết quả rõ ràng, không chấp nhận thất bại dễ dàng',
+      'Thương thuyết và đàm phán xuất sắc trong môi trường áp lực cao',
+    ],
+    phat: [
+      'Đôi khi đặt kết quả lên trên yếu tố con người trong đội nhóm',
+      'Khó cân bằng giữa công việc và cuộc sống cá nhân',
+      'Kỳ vọng cao có thể tạo áp lực vô hình cho đồng nghiệp',
+      'Dễ bị cuốn vào stress và căng thẳng khi mục tiêu không đạt',
+    ],
+    loi_khuyen: 'Bạn có tố chất của người làm kinh doanh. Đầu tư xây dựng lòng tin đội nhóm — vì sự trung thành của người tài còn quý hơn bất kỳ KPI nào.',
+    jobs: [
+      { dm: 'Ngành hàng / Mua hàng',      vt: 'Chuyên viên mua hàng',            th: ['BHX','ĐMX','TopZone'],         match: 93 },
+      { dm: 'Kế toán / Tài chính',        vt: 'Chuyên viên tài chính',            th: ['MWG'],                         match: 88 },
+      { dm: 'TMĐT / Kênh online',         vt: 'Chuyên viên thương mại điện tử',  th: ['MWG'],                         match: 83 },
+      { dm: 'Bán hàng / Thu ngân',        vt: 'Nhân viên bán hàng',              th: ['TGDĐ','ĐMX','BHX','TopZone'], match: 76 },
+    ],
+  },
+  9: {
+    ten: 'Người Nhân Ái',
+    tags: ['Tầm nhìn', 'Vị tha', 'Truyền cảm hứng'],
+    master: false,
+    manh: [
+      'Tư duy toàn diện, quan tâm đến tác động cộng đồng và xã hội',
+      'Truyền cảm hứng và dẫn dắt bằng giá trị cốt lõi, không bằng quyền lực',
+      'Sáng tạo và nhạy bén với xu hướng xã hội và văn hóa',
+      'Kiên nhẫn và bền bỉ với những dự án dài hạn, ý nghĩa lớn',
+    ],
+    phat: [
+      'Đôi khi mơ mộng, thiếu tập trung vào chi tiết thực thi cụ thể',
+      'Khó đặt ranh giới cá nhân rõ ràng trong công việc',
+      'Chưa quen với áp lực mục tiêu tài chính ngắn hạn',
+      'Xu hướng trì hoãn khi cảm thấy thiếu ý nghĩa trong công việc',
+    ],
+    loi_khuyen: 'Bạn nhìn thấy bức tranh lớn mà nhiều người không thấy. Kết hợp tầm nhìn với kỹ năng thực thi — và bạn sẽ tạo ra dấu ấn thực sự tại MWG.',
+    jobs: [
+      { dm: 'Hành chánh / Nhân sự',       vt: 'Chuyên viên văn hóa doanh nghiệp',th: ['MWG'],                         match: 91 },
+      { dm: 'Marketing / Media / PR',     vt: 'Chuyên viên marketing / PR',       th: ['MWG','TGDĐ','BHX'],           match: 85 },
+      { dm: 'Tổng đài / Chăm sóc KH',    vt: 'Nhân viên chăm sóc khách hàng',   th: ['TGDĐ','ĐMX','MWG'],           match: 77 },
+      { dm: 'TMĐT / Kênh online',         vt: 'Chuyên viên cộng đồng online',    th: ['MWG'],                         match: 70 },
+    ],
+  },
+  11: {
+    ten: 'Người Khai Sáng',
+    label: '11/2',
+    tags: ['Trực giác', 'Truyền cảm hứng', 'Nhạy cảm cao'],
+    master: true,
+    manh: [
+      'Trực giác mạnh mẽ, thường cảm nhận và nắm bắt vấn đề trước khi dữ liệu xác nhận',
+      'Khả năng truyền cảm hứng tự nhiên — chạm đến cảm xúc và thay đổi tư duy người khác',
+      'Kết nối sâu với con người, tạo dựng lòng tin bền vững trong đội nhóm và khách hàng',
+      'Sáng tạo và nhìn xa, thường đề xuất ý tưởng đột phá vượt tầm tư duy thông thường',
+    ],
+    phat: [
+      'Dễ bị áp lực và căng thẳng khi môi trường thiếu ổn định hoặc xung đột cao',
+      'Đặt kỳ vọng lý tưởng cao — dễ thất vọng khi thực tế không đáp ứng tầm nhìn',
+      'Dao động cảm xúc mạnh, khó duy trì tập trung khi nội tâm chưa cân bằng',
+      'Đôi khi thiếu thực tế trong việc lên kế hoạch và triển khai chi tiết cụ thể',
+    ],
+    loi_khuyen: 'Bạn mang trong mình ánh sáng hiếm có. Hãy học cách bảo vệ năng lượng nội tâm — cân bằng giữa lý tưởng và thực tiễn. Khi trực giác kết hợp với hành động, bạn có thể tạo ra những thay đổi thực sự ý nghĩa tại MWG.',
+    jobs: [
+      { dm: 'Hành chánh / Nhân sự',       vt: 'Chuyên viên văn hóa & trải nghiệm nhân viên', th: ['MWG'],            match: 94 },
+      { dm: 'Marketing / Media / PR',     vt: 'Chuyên viên brand & nội dung cảm xúc',         th: ['MWG','TGDĐ','BHX'], match: 89 },
+      { dm: 'Tổng đài / Chăm sóc KH',    vt: 'Chuyên viên chăm sóc khách hàng cao cấp',      th: ['TGDĐ','ĐMX','MWG'], match: 83 },
+      { dm: 'Thiết kế / UX-UI',           vt: 'Chuyên viên UX nghiên cứu người dùng',          th: ['MWG'],            match: 76 },
+    ],
+  },
+  22: {
+    ten: 'Người Kiến Tạo',
+    label: '22/4',
+    tags: ['Tầm nhìn', 'Xây dựng hệ thống', 'Bền vững'],
+    master: true,
+    manh: [
+      'Tầm nhìn chiến lược lớn kết hợp khả năng thực thi bài bản — hiếm có trong một người',
+      'Xây dựng hệ thống và quy trình bền vững, có tính ứng dụng thực tiễn cao dài hạn',
+      'Kỷ luật, kiên định và không từ bỏ — hoàn thành mục tiêu dù con đường có gian nan',
+      'Lãnh đạo bằng hành động cụ thể, tạo niềm tin thông qua kết quả thực tế nhìn thấy được',
+    ],
+    phat: [
+      'Áp lực tự đặt ra quá lớn — xu hướng cầu toàn với chính mình và kỳ vọng cao với nhóm',
+      'Khó ủy quyền vì luôn muốn đảm bảo mọi thứ được làm đúng theo tiêu chuẩn của mình',
+      'Dễ kiệt sức khi ôm quá nhiều trách nhiệm mà không biết dừng hay phân chia hợp lý',
+      'Thiếu linh hoạt khi kế hoạch thay đổi đột ngột hoặc cần điều chỉnh giữa chừng',
+    ],
+    loi_khuyen: 'Bạn có năng lực xây dựng những điều vĩ đại và bền vững. Hãy tin tưởng đội nhóm — một mình không ai xây được tòa nhà lớn. Phân chia đúng người đúng việc chính là cách bạn nhân sức mạnh của mình lên nhiều lần.',
+    jobs: [
+      { dm: 'Kế toán / Tài chính',        vt: 'Chuyên viên tài chính / kiểm soát nội bộ', th: ['MWG'],               match: 95 },
+      { dm: 'QA / QC / Kiểm soát',        vt: 'Trưởng nhóm kiểm soát chất lượng',         th: ['MWG','BHX','ĐMX'],   match: 90 },
+      { dm: 'Kho vận / Kho trung tâm',    vt: 'Chuyên viên quản lý vận hành kho',         th: ['MWG'],               match: 85 },
+      { dm: 'Xây dựng / Bảo trì / Điện', vt: 'Kỹ sư quản lý dự án cơ sở hạ tầng',       th: ['MWG'],               match: 78 },
+    ],
+  },
+  33: {
+    ten: 'Người Chữa Lành',
+    label: '33/6',
+    tags: ['Yêu thương', 'Phụng sự', 'Nâng đỡ cộng đồng'],
+    master: true,
+    manh: [
+      'Yêu thương và tận tụy ở mức độ hiếm thấy — đặt hết tâm huyết vào việc giúp đỡ người khác',
+      'Khả năng chữa lành và xoa dịu xung đột trong đội nhóm, khôi phục gắn kết và hòa khí',
+      'Truyền cảm hứng sống đẹp và làm việc có ý nghĩa, nâng cao tinh thần toàn bộ tập thể',
+      'Nhạy cảm sâu sắc với nhu cầu cảm xúc của con người — tạo môi trường an toàn để phát triển',
+    ],
+    phat: [
+      'Hy sinh bản thân quá mức — đặt nhu cầu người khác lên trên bản thân đến mức kiệt sức',
+      'Khó từ chối dù bản thân đang quá tải, dẫn đến burnout âm thầm và mãn tính',
+      'Dễ bị tổn thương khi không được ghi nhận hoặc khi cảm thấy nỗ lực bị coi thường',
+      'Đặt tiêu chuẩn đạo đức rất cao, đôi khi khó chấp nhận thỏa hiệp trong môi trường thực tế',
+    ],
+    loi_khuyen: 'Trái tim bạn là tài sản quý nhất của đội nhóm. Nhưng yêu thương bền vững phải bắt đầu từ chính mình. Hãy học nói không khi cần thiết — đó không phải ích kỷ, mà là sự khôn ngoan để bạn tiếp tục cống hiến lâu dài.',
+    jobs: [
+      { dm: 'Dược / Y tế',                vt: 'Dược sĩ tư vấn / quản lý nhà thuốc',                   th: ['An Khang'],          match: 96 },
+      { dm: 'Hành chánh / Nhân sự',       vt: 'Chuyên viên phúc lợi & trải nghiệm nhân viên',          th: ['MWG'],               match: 91 },
+      { dm: 'Tổng đài / Chăm sóc KH',    vt: 'Chuyên viên chăm sóc khách hàng VIP',                   th: ['TGDĐ','ĐMX','MWG'], match: 85 },
+      { dm: 'Marketing / Media / PR',     vt: 'Chuyên viên CSR & truyền thông cộng đồng',              th: ['MWG','BHX'],         match: 79 },
+    ],
+  },
+};
+
+// ──────────────────────────────────
+// Điền select ngày/tháng/năm
+// ──────────────────────────────────
+(function initSelects() {
+  const sn = document.getElementById('sel-ngay');
+  const st = document.getElementById('sel-thang');
+  const sy = document.getElementById('sel-nam');
+
+  for (let i = 1; i <= 31; i++) {
+    const o = document.createElement('option');
+    o.value = i; o.text = (i < 10 ? '0' : '') + i;
+    sn.appendChild(o);
+  }
+  const thang = ['01 – Tháng 1','02 – Tháng 2','03 – Tháng 3','04 – Tháng 4','05 – Tháng 5','06 – Tháng 6',
+                  '07 – Tháng 7','08 – Tháng 8','09 – Tháng 9','10 – Tháng 10','11 – Tháng 11','12 – Tháng 12'];
+  thang.forEach((t, i) => {
+    const o = document.createElement('option');
+    o.value = i + 1; o.text = t;
+    st.appendChild(o);
+  });
+  const now = new Date().getFullYear();
+  for (let y = now - 18; y >= now - 55; y--) {
+    const o = document.createElement('option');
+    o.value = y; o.text = y;
+    sy.appendChild(o);
+  }
+  // default: 01/01/1995
+  sn.value = 1; st.value = 1; sy.value = 1995;
+
+  [sn, st, sy].forEach(el => el.addEventListener('change', xemTruoc));
+  xemTruoc();
+})();
+
+function xemTruoc() {
+  const ngay = +document.getElementById('sel-ngay').value;
+  const thang = +document.getElementById('sel-thang').value;
+  const nam = +document.getElementById('sel-nam').value;
+  if (!ngay || !thang || !nam) return;
+
+  const digits = String(ngay).padStart(2,'0') + String(thang).padStart(2,'0') + String(nam);
+  const steps = [];
+  let sum = digits.split('').reduce((a,b) => a + +b, 0);
+  steps.push(`${digits.split('').join(' + ')} = <strong>${sum}</strong>`);
+
+  while (sum > 9 && sum !== 11 && sum !== 22 && sum !== 33) {
+    const prev = sum;
+    const digs = String(sum).split('');
+    sum = digs.reduce((a,b) => a + +b, 0);
+    steps.push(`${digs.join(' + ')} = <strong>${sum}</strong>`);
+  }
+
+  const preview = document.getElementById('calc-preview');
+  preview.innerHTML = steps.join(' &nbsp;→&nbsp; ');
+  preview.classList.add('show');
+}
+
+// ──────────────────────────────────
+// Tính con số chủ đạo
+// ──────────────────────────────────
+function tinhSo() {
+  const ngay = +document.getElementById('sel-ngay').value;
+  const thang = +document.getElementById('sel-thang').value;
+  const nam = +document.getElementById('sel-nam').value;
+  if (!ngay || !thang || !nam) return;
+
+  const digits = String(ngay).padStart(2,'0') + String(thang).padStart(2,'0') + String(nam);
+  let sum = digits.split('').reduce((a,b) => a + +b, 0);
+  while (sum > 9 && sum !== 11 && sum !== 22 && sum !== 33) {
+    sum = String(sum).split('').reduce((a,b) => a + +b, 0);
+  }
+
+  hienThi(sum);
+}
+
+// ──────────────────────────────────
+// Hiển thị kết quả
+// ──────────────────────────────────
+function hienThi(so) {
+  const d = DATA[so];
+  if (!d) return;
+
+  // highlight picker
+  document.querySelectorAll('.num-btn').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById('btn-' + so);
+  if (btn) btn.classList.add('active');
+
+  // hero
+  const hero = document.getElementById('num-hero');
+  hero.className = 'number-hero' + (d.master ? ' master-number' : '');
+
+  const label = d.label || String(so);
+  document.getElementById('num-badge').textContent = label;
+  document.getElementById('num-label').textContent = 'Con số chủ đạo';
+
+  const mbw = document.getElementById('master-badge-wrap');
+  mbw.innerHTML = d.master
+    ? `<div class="master-badge">✦ Số đặc biệt (Master Number)</div>`
+    : '';
+
+  document.getElementById('num-name').innerHTML = `${label} – <em>${d.ten}</em>`;
+
+  const tagsRow = document.getElementById('tags-row');
+  tagsRow.innerHTML = d.tags.map(t => `<span class="tag">${t}</span>`).join('');
+
+  // Điểm mạnh
+  const ml = document.getElementById('manh-list');
+  ml.innerHTML = d.manh.map(m =>
+    `<li><span class="trait-dot dot-green"></span><span>${m}</span></li>`
+  ).join('');
+
+  // Điểm cần phát triển
+  const pl = document.getElementById('phat-list');
+  pl.innerHTML = d.phat.map(p =>
+    `<li><span class="trait-dot dot-red"></span><span>${p}</span></li>`
+  ).join('');
+
+  // Lời khuyên
+  document.getElementById('advice-text').textContent = d.loi_khuyen;
+
+  // Bảng việc làm
+  const tbody = document.getElementById('jobs-tbody');
+  tbody.innerHTML = d.jobs.map(j => {
+    const pills = j.th.map(b => `<span class="brand-pill">${b}</span>`).join('');
+    return `<tr>
+      <td>${j.dm}</td>
+      <td>${j.vt}</td>
+      <td><div class="brand-pills">${pills}</div></td>
+      <td>
+        <div class="match-bar-wrap">
+          <div class="match-bar-bg"><div class="match-bar-fill" style="width:0%" data-target="${j.match}"></div></div>
+          <span class="match-pct">${j.match}%</span>
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
+
+  // Show section
+  const rs = document.getElementById('result-section');
+  rs.classList.add('show');
+  rs.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  // Animate bars after a tick
+  setTimeout(() => {
+    document.querySelectorAll('.match-bar-fill').forEach(bar => {
+      bar.style.width = bar.dataset.target + '%';
+    });
+  }, 100);
+}
+
+// ──────────────────────────────────
+// Build picker grid
+// ──────────────────────────────────
+(function buildPicker() {
+  const grid = document.getElementById('number-grid');
+  const orders = [1,2,3,4,5,6,7,8,9,11,22,33];
+  const names = {
+    1:'Lãnh Đạo', 2:'Kết Nối', 3:'Sáng Tạo', 4:'Xây Dựng',
+    5:'Tự Do', 6:'Nuôi Dưỡng', 7:'Tư Duy', 8:'Thịnh Vượng',
+    9:'Nhân Ái', 11:'Khai Sáng', 22:'Kiến Tạo', 33:'Chữa Lành'
+  };
+  const labels = { 11:'11/2', 22:'22/4', 33:'33/6' };
+
+  orders.forEach(n => {
+    const isMaster = [11,22,33].includes(n);
+    const btn = document.createElement('button');
+    btn.className = 'num-btn' + (isMaster ? ' master' : '');
+    btn.id = 'btn-' + n;
+    btn.innerHTML = `<span>${labels[n] || n}</span><span class="n-small">${names[n]}</span>`;
+    btn.onclick = () => hienThi(n);
+    grid.appendChild(btn);
+  });
+})();
+</script>
+</body>
+</html>
